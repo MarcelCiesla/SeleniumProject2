@@ -1,6 +1,5 @@
 package pl.testeroprogramowania.tests;
 
-import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 import org.testng.annotations.Test;
@@ -10,10 +9,21 @@ public class RegisterTest extends BaseTest {
 
     @Test
     public void registerUserTest() {
-        WebElement entryTitle = new HomePage(driver).openMyAccountPage()
-                .registerUser("test@test.pl", "test@test.pl").getEntryTitle();
+        int random = (int) (Math.random() * 1000);
 
-        Assert.assertTrue(entryTitle.isDisplayed());
-        Assert.assertEquals(entryTitle.getText(),"My Account");
+
+        WebElement dashboardLink = new HomePage(driver).openMyAccountPage()
+                .registerUserValidData("test" + random + "@test.pl", "test@test.pl").getDashboardLink();
+
+        Assert.assertEquals(dashboardLink.getText(),"Dashboard");
+    }
+    @Test
+    public void registerWithSameEmailTest() {
+
+        WebElement error = new HomePage(driver).openMyAccountPage()
+                .registerUserInvalidData("test@test.pl", "test@test.pl").getError();
+
+        Assert.assertTrue(error.getText().contains("An account is already registered with your email address"));
     }
 }
+
