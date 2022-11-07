@@ -18,7 +18,7 @@ public class LoginTest extends BaseTest {
         Assert.assertEquals(dashboardLink.getText(), "Dashboard");
     }
 
-    @Test
+  /*  @Test
     public void loginWithInvalidPasswordTest() {
 
         WebElement error = new HomePage(driver)
@@ -27,6 +27,6 @@ public class LoginTest extends BaseTest {
                 .getError();
 
         Assert.assertTrue(error.getText().contains("Incorrect username or password"));
-    }
+    }*/
 }
 

@@ -1,10 +1,12 @@
 package pl.testeroprogramowania.pages;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.devtools.v85.dom.model.ShadowRootType;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import pl.testeroprogramowania.utils.SeleniumHelper;
 
 public class MyAccountPage {
 
@@ -40,16 +42,25 @@ public class MyAccountPage {
     private void registerUser(String email, String password) {
         regEmailInput.sendKeys(email);
         regPasswordInput.sendKeys(password);
-        regButton.click();
+        By productName = By.name("register");
+        SeleniumHelper.waitForClickable(productName, driver);
+        driver.findElement(productName).click();
+        /*regButton.click();*/
     }
 
     public LoggedUserPage registerUserValidData(String email, String password) {
         registerUser(email, password);
+        By productName = By.name("register");
+        SeleniumHelper.waitForClickable(productName, driver);
+        driver.findElement(productName).click();
         return new LoggedUserPage(driver);
     }
 
     public MyAccountPage registerUserInvalidData(String email, String password) {
         registerUser(email, password);
+        By productName = By.name("register");
+        SeleniumHelper.waitForClickable(productName, driver);
+        driver.findElement(productName).click();
         return this;
     }
 
