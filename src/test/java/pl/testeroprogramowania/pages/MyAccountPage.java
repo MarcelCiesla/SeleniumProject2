@@ -42,12 +42,14 @@ public class MyAccountPage {
         regPasswordInput.sendKeys(password);
         regButton.click();
     }
+
     public LoggedUserPage registerUserValidData(String email, String password) {
-        registerUser(email,password);
+        registerUser(email, password);
         return new LoggedUserPage(driver);
     }
+
     public MyAccountPage registerUserInvalidData(String email, String password) {
-        registerUser(email,password);
+        registerUser(email, password);
         return this;
     }
 
@@ -58,16 +60,16 @@ public class MyAccountPage {
     }
 
     public LoggedUserPage logInValidData(String username, String password) {
-        logIn(username,password);
+        logIn(username, password);
         return new LoggedUserPage(driver);
     }
 
     public MyAccountPage logInInvalidData(String username, String password) {
-        logIn(username,password);
+        logIn(username, password);
         return this;
     }
 
-    public WebElement getError(){
+    public WebElement getError() {
         return error;
     }
 }

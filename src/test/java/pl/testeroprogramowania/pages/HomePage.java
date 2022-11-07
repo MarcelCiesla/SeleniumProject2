@@ -12,7 +12,7 @@ public class HomePage {
 
     private WebDriver driver;
 
-    public HomePage (WebDriver driver) {
+    public HomePage(WebDriver driver) {
         PageFactory.initElements(driver, this);
         this.driver = driver;
     }
