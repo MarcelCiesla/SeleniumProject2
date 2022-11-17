@@ -1,11 +1,16 @@
 package pl.testeroprogramowania.pages;
 
+import com.aventstack.extentreports.Status;
+import com.aventstack.extentreports.model.Test;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import pl.testeroprogramowania.tests.SeleniumHelper;
 
-public class ProductPage {
+import java.io.IOException;
+
+public class ProductPage extends Screen {
 
     @FindBy(name = "add-to-cart")
     private WebElement addToCartButton;
@@ -20,13 +25,15 @@ public class ProductPage {
         this.driver = driver;
     }
 
-    public ProductPage addProductToCart() {
+    public ProductPage addProductToCart() throws IOException {
         addToCartButton.click();
+        test.log(Status.PASS, "adding product to cart", SeleniumHelper.getScreenshot(driver));
         return this;
     }
 
-    public CartPage viewCart() {
+    public CartPage viewCart() throws IOException {
         viewCartButton.click();
+        test.log(Status.PASS, "View Cart", SeleniumHelper.getScreenshot(driver));
         return new CartPage(driver);
     }
 }

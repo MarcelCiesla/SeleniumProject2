@@ -1,5 +1,7 @@
 package pl.testeroprogramowania.tests;
 
+import com.aventstack.extentreports.ExtentTest;
+import com.aventstack.extentreports.Status;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import org.testng.Assert;
 import org.testng.annotations.Test;
@@ -7,10 +9,12 @@ import pl.testeroprogramowania.models.Customer;
 import pl.testeroprogramowania.pages.HomePage;
 import pl.testeroprogramowania.pages.OrderDetailsPage;
 
+import java.io.IOException;
+
 public class CheckoutTest extends BaseTest {
 
     @Test
-    public void checkoutTest() {
+    public void checkoutTest() throws IOException {
 
         Customer customer = new Customer();
         customer.setEmail("specificEmail@gmail.com");
@@ -35,6 +39,8 @@ public class CheckoutTest extends BaseTest {
                         .viewCart()
                         .openAddressDetails()
                         .fillAddressDetails(customer, "Some random comment");
+
+
 
         Assert.assertEquals(orderDetailsPage.getOrderNotice().getText(), "Thank you. Your order has been received.");
         Assert.assertEquals(orderDetailsPage.getProductName().getText(), "Java Selenium WebDriver × 1");
