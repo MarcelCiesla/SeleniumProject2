@@ -1,13 +1,17 @@
 package pl.testeroprogramowania.pages;
 
+import com.aventstack.extentreports.Status;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.Select;
 import pl.testeroprogramowania.models.Customer;
+import pl.testeroprogramowania.tests.SeleniumHelper;
 
-public class AddressDetailsPage {
+import java.io.IOException;
+
+public class AddressDetailsPage extends Screen{
 
     @FindBy(id = "billing_first_name")
     private WebElement firstNameInput;
@@ -50,7 +54,7 @@ public class AddressDetailsPage {
         this.driver = driver;
     }
 
-    public OrderDetailsPage fillAddressDetails(Customer customer, String comments) {
+    public OrderDetailsPage fillAddressDetails(Customer customer, String comments) throws IOException {
         firstNameInput.sendKeys(customer.getFirstName());
         lastNameInput.sendKeys(customer.getLastName());
         companyNameInput.sendKeys(customer.getCompanyName());
@@ -63,7 +67,7 @@ public class AddressDetailsPage {
         billingEmailInput.sendKeys(customer.getEmail());
         orderCommentsInput.sendKeys(comments);
         placeOrderButton.click();
-
+        test.log(Status.PASS, "Filling address details", SeleniumHelper.getScreenshot(driver));
         return new OrderDetailsPage(driver);
     }
 }
